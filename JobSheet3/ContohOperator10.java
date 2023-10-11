@@ -18,6 +18,8 @@ public class ContohOperator10 {
         z %= 2;
         System.out.println("Hasil akhir " +z);
 
+
     }
+    
     
 }

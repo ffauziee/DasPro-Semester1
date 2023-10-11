@@ -1,3 +1,5 @@
+package SistemPeminjaman;
+
 import java.util.Scanner;
 
 /**
@@ -49,5 +51,7 @@ public class SewaPS {
             harga_akhir = LamaPinjam*hps4;
         }
         System.out.print("Harga yang harus anda bayar adalah Rp" +harga_akhir+ "000,00");
+
+        sc.close();
     }
 }
