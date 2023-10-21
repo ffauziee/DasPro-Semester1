@@ -5,14 +5,9 @@ public class cobacoba {
         Scanner input = new Scanner(System.in);
         int pilihan;
         double totalHarga = 0;
-        String nama, nomor;
+        
 
-        System.out.print("Masukkan Nama Anda: ");
-        nama = input.nextLine();
-
-        System.out.print("Masukkan Nomor Handphone anda: ");
-        nomor = input.nextLine();
-
+        
         do {
             System.out.println("\nSelamat datang di Sistem Rental PlayStation Dabest\n");
             System.out.println("### Pilih Opsi Anda ###\n");
@@ -34,14 +29,13 @@ public class cobacoba {
                     System.out.println("Total Harga: Rp." + totalHarga);
                     break;
                 case 4:
-                    System.out.println("Terima kasih telah menggunakan sistem peminjaman.");
+                    System.out.println("Terima kasih telah datang ke rental kami.");
                     break;
                 default:
                     System.out.println("Pilihan tidak valid. Silakan pilih menu yang benar.");
             }
         } while (pilihan != 4);
 
-        input.close();
     }
 
     static void daftarBarangTersedia() {
@@ -54,17 +48,22 @@ public class cobacoba {
 
     static double pinjamBarang() {
         Scanner input = new Scanner(System.in);
+        String nama, nomor;
         int nomorBarang;
         int durasi;
         double harga = 0;
 
+        System.out.print("Masukkan Nama Anda: ");
+        nama = input.nextLine();
+
+        System.out.print("Masukkan Nomor Handphone anda: ");
+        nomor = input.nextLine();
 
         System.out.print("Masukkan nomor barang yang ingin dipinjam: ");
         nomorBarang = input.nextInt();
 
         System.out.print("Masukkan durasi peminjaman (hari): ");
         durasi = input.nextInt();
-
 
         switch (nomorBarang) {
             case 1:
@@ -75,19 +74,24 @@ public class cobacoba {
                 break;
             case 3:
                 harga = 50000 * durasi;
+                break;
             case 4:
                 harga = 65000 * durasi;            
                 break;
             default:
                 System.out.println("Nomor barang tidak valid.");
+                return 0;
         }
 
         if (harga > 0) {
             System.out.println("\n################################");
-            System.out.println("##Bukti Peminjaman PlayStation##");
+            System.out.println("# Bukti Peminjaman PlayStation #");
             System.out.println("################################\n");
-            System.out.println("Anda telah meminjam barang nomor " + nomorBarang + " selama " + durasi + " hari.");
-            System.out.println("Harga peminjaman: Rp." + harga);
+            System.out.println("Nama: " + nama);
+            System.out.println("Nomor: " + nomor);
+            System.out.println("Barang yang disewa: " + nomorBarang);
+            System.out.println("Waktu Peminjaman: " + durasi + " hari");
+            System.out.println("Total harga peminjaman: Rp." + harga);
         }
 
         return harga;
