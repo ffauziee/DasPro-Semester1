@@ -6,8 +6,6 @@ public class cobacoba {
         int pilihan;
         double totalHarga = 0;
         
-
-        
         do {
             System.out.println("\nSelamat datang di Sistem Rental PlayStation Dabest\n");
             System.out.println("### Pilih Opsi Anda ###\n");
@@ -30,11 +28,14 @@ public class cobacoba {
                     break;
                 case 4:
                     System.out.println("Terima kasih telah datang ke rental kami.");
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Pilihan tidak valid. Silakan pilih menu yang benar.");
             }
         } while (pilihan != 4);
+
+        input.close();
 
     }
 
@@ -80,8 +81,9 @@ public class cobacoba {
                 break;
             default:
                 System.out.println("Nomor barang tidak valid.");
-                return 0;
         }
+
+        input.close();
 
         if (harga > 0) {
             System.out.println("\n################################");

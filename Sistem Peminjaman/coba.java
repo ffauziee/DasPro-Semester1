@@ -38,5 +38,7 @@ public class coba {
         System.out.println("Denda: " + denda);
         System.out.println("Total biaya: " + totalBiaya);
 
+
+        input.close();
     }
 }
