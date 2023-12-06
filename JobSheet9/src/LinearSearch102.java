@@ -19,15 +19,14 @@ public class LinearSearch102 {
         key = input10.nextInt();
 
 
-        for (int i = 0; i < arrayInt.length; i++) {
+        int i = 0;
             if (arrayInt[i] == key) {
                 hasil = i;
                 System.out.println("key ada di posisi indeks ke- " + (hasil+1));
-                break;
             } else {
                 System.out.println("key tidak ditemukan");
             }
-        }
+            input10.close();
     }
 
         
