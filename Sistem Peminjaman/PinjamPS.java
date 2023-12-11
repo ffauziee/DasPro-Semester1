@@ -1,89 +1,105 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PinjamPS {
+
+    static class Console {
+        int id;
+        boolean isRented;
+
+        public Console(int id) {
+            this.id = id;
+            this.isRented = false;
+        }
+    }
+
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String nama, nomorHp, seriPlaystation;
-        int lamaPeminjaman, seri, pilihan, barang;
-        double harga = 0;
-        double totalHarga = 0;
+        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("##############################");
-        System.out.println("##############################");
-        System.out.println("##                          ##");
-        System.out.println("## Selamat datang di rental ##");
-        System.out.println("##          PS LekSri       ##");
-        System.out.println("##                          ##");
-        System.out.println("##############################");
-        System.out.println("##############################");
-        System.out.println("");
-        System.out.println("");
+        ArrayList<Console> consoles = new ArrayList<>();
+        consoles.add(new Console(1));
+        consoles.add(new Console(2));
+        consoles.add(new Console(3));
 
-        do {
-            System.out.println("\nSilahkan pilih menu\n");
-            System.out.println("1. Daftar PlayStation");
-            System.out.println("2. Peminjaman PlayStation");
-            System.out.println("3. Total Harga Sewa");
-            System.out.println("4. Keluar");
-            System.out.print("\nSilahkan pilih opsi (1/2/3/4): ");
-            pilihan = sc.nextInt();
+        System.out.println("Selamat datang di PlayStation Rental System");
 
-            switch (pilihan) {
-                case 1: 
-                System.out.println("\nDaftar PlayStation yang tersedia: ");
-                System.out.println("1. PlayStation 2 : 2000/Jam ");
-                System.out.println("2. PlayStation 3 : 4000/Jam ");
-                System.out.println("3. PlayStation 4 : 7000/Jam ");
-                System.out.println("4. PlayStation 5 : 14.000/Jam ");
+        while (true) {
+            System.out.println("Silakan pilih opsi:");
+            System.out.println("1. Rental PlayStation");
+            System.out.println("2. Pengembalian PlayStation");
+            System.out.println("3. Keluar");
+
+            int option = scanner.nextInt();
+
+            switch (option) {
+                case 1:
+                    rentalPlayStation(scanner, consoles);
                     break;
                 case 2:
-                System.out.println("Silahkan Masukkan identitas anda: ");
-                System.out.print("Nama: ");
-                nama = sc.nextLine();
-                System.out.print("Nomor HP: ");
-                nomorHp =sc.nextLine();
-                System.out.print("Masukkan nomor barang yang ingin dipinjam: ");
-                System.out.println("1. PlayStation 2 : 2000/Jam ");
-                System.out.println("2. PlayStation 3 : 4000/Jam ");
-                System.out.println("3. PlayStation 4 : 7000/Jam ");
-                System.out.println("4. PlayStation 5 : 14.000/Jam ");
-                barang = sc.nextInt();
-                System.out.print("Masukkan durasi peminjaman (Jam): ");
-                lamaPeminjaman = sc.nextInt();
-
-                switch (barang) {
-                    case 1:
-                        
-                        harga = 30000 * lamaPeminjaman;
-                        break;
-                    case 2:
-                        harga = 40000 * lamaPeminjaman;
-                        break;
-                    case 3:
-                        harga = 50000 * lamaPeminjaman;
-                        break;
-                    case 4:
-                        harga = 65000 * lamaPeminjaman;            
-                        break;
-                    default:
-                        System.out.println("Nomor barang tidak valid.");
-
-                }
-                  totalHarga += harga;
-                
+                    returnPlayStation(scanner, consoles);
+                    break;
                 case 3:
-                    System.out.println("Total Harga sewa anda adalah: " + totalHarga);
-                case 4:
-                    System.out.println("Terimakasih telah menggunakan jasa sewa kami");
-                    System.exit(0);
+                    System.out.println("Terima kasih atas kunjungan Anda!");
+                    return;
                 default:
-                System.out.println("pilihan anda tidak benar mohon pilih kembali. ");
-            
-            
-                
-            } 
-              
-        } while (pilihan !=4);
+                    System.out.println("Opsi tidak valid");
+                    break;
+            }
+        }
+    }
 
+    private static void rentalPlayStation(Scanner scanner, ArrayList<Console> consoles) {
+        System.out.println("Silakan masukkan nomor konsol yang ingin Anda sewa:");
+        int consoleId = scanner.nextInt();
+    
+        Console selectedConsole = null;
+        for (Console console : consoles) {
+            if (console.id == consoleId && !console.isRented) {
+                selectedConsole = console;
+                break;
+            }
+        }
+    
+        if (selectedConsole == null) {
+            System.out.println("Konsol yang ingin Anda sewa tidak tersedia");
+            return;
+        }
+    
+        System.out.println("Berapa hari Anda ingin menyewa konsol ini?");
+        int rentalDays = scanner.nextInt();
+    
+        int rentalFee = calculateRentalFee(rentalDays);
+    
+        selectedConsole.isRented = true;
+    
+        System.out.println("Anda telah berhasil menyewa PlayStation dengan console " + consoleId + " selama " + rentalDays + " hari. Tarif sewa Anda adalah Rp " + rentalFee);
+    }
+    
+    private static int calculateRentalFee(int rentalDays) {
+        
+        if (rentalDays > 7) {
+        return 5000 + 1000 * (rentalDays - 1);
+    }
+
+    private static void returnPlayStation(Scanner scanner, ArrayList<Console> consoles) {
+        System.out.println("Silakan masukkan nomor konsol yang ingin Anda kembalikan:");
+        int consoleId = scanner.nextInt();
+
+        Console selectedConsole = null;
+        for (Console console : consoles) {
+            if (console.id == consoleId && console.isRented) {
+                selectedConsole = console;
+                break;
+            }
+        }
+
+        if (selectedConsole == null) {
+            System.out.println("Konsol yang ingin Anda kembalikan tidak ditemukan");
+            return;
+        }
+
+        selectedConsole.isRented = false;
+
+        System.out.println("Terima kasih atas pengembalian konsol " + consoleId);
     }
 }

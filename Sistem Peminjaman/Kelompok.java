@@ -1,11 +1,10 @@
 import java.util.Scanner;
 
-public class cobacoba {
+public class Kelompok {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        int pilihan;
         double totalHarga = 0;
-        
+        int pilihan;
         do {
             System.out.println("\nSelamat datang di Sistem Rental PlayStation Dabest\n");
             System.out.println("### Pilih Opsi Anda ###\n");
@@ -15,6 +14,7 @@ public class cobacoba {
             System.out.println("4. Keluar");
             System.out.print("Pilih menu (1/2/3/4): ");
             pilihan = input.nextInt();
+            input.nextLine();
 
             switch (pilihan) {
                 case 1:
@@ -35,7 +35,6 @@ public class cobacoba {
             }
         } while (pilihan != 4);
 
-        input.close();
 
     }
 
@@ -83,7 +82,6 @@ public class cobacoba {
                 System.out.println("Nomor barang tidak valid.");
         }
 
-        input.close();
 
         if (harga > 0) {
             System.out.println("\n################################");
@@ -94,9 +92,9 @@ public class cobacoba {
             System.out.println("Barang yang disewa: " + nomorBarang);
             System.out.println("Waktu Peminjaman: " + durasi + " hari");
             System.out.println("Total harga peminjaman: Rp." + harga);
+
         }
 
         return harga;
     }
 }
-
