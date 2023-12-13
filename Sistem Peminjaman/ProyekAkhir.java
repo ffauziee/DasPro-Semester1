@@ -1,11 +1,12 @@
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class cobaPA {
+public class ProyekAkhir {
     static Scanner scanner = new Scanner(System.in);
     static String nama = "";
     static String noHP = "";
     static String NIK = "";
+    static HashMap<String, String> dataPelanggan = new HashMap<>();
     static String[] barang = {"PlayStation 2", "PlayStation 3", "PlayStation 4"};
     static int[] harga = {45000, 75000, 100000};
     static int[] pesanan = new int[barang.length];
@@ -24,6 +25,8 @@ public class cobaPA {
         noHP = scanner.nextLine();
         System.out.print("NIK: ");
         NIK = scanner.nextLine();
+
+        dataPelanggan.put(NIK, "Nama: " + nama + ", No HP: " + noHP);
 
         System.out.println("\nData yang telah dimasukkan:");
         System.out.println("Nama: " + nama);
@@ -71,47 +74,68 @@ public class cobaPA {
             int pilihanMenu = scanner.nextInt();
             scanner.nextLine();
 
-            if (pilihanMenu == 1) {
-                inputDataDiri();
-            } else if (pilihanMenu == 2) {
-                pesanBarang();
-                break;
-            } else if (pilihanMenu == 3) {
-                daftarHargaSewa();
-                break;
-            } else if (pilihanMenu == 4) {
-                keranjang();
-                break;
-            } else {
-                System.out.println("Pilihan tidak valid, silakan pilih menu yang benar.");
+            switch (pilihanMenu) {
+                case 1: 
+                    inputDataDiri();
+                    break;
+                case 2:
+                    pesanBarang();
+                    break;
+                case 3:
+                    daftarHargaSewa();
+                    break;
+                case 4:
+                    keranjang();
+                    break;
+                case 5:
+                System.out.println("Terima kasih telah menggunakan layanan kami!");
+                System.exit(pilihanMenu);
+                
+                default:
+                System.out.println("Pilihan anda tidak valid, Silahkan pilih menu yang sesuai");
+                    break;
             }
         }
     }
 
     static void keranjang() {
-        while (true) {
         System.out.println("\nMenu Keranjang:");
-        System.out.println("Barang yang Anda Pilih:");
+    System.out.println("Barang yang Anda Pilih:");
 
-        boolean adaBarang = false;
-        for (int i = 0; i < barang.length; i++) {
-            if (pesanan[i] > 0) {
-                System.out.println("- " + barangDipesan[i] + " (" + pesanan[i] + " barang, " + lamaPeminjaman[i] + " hari)");
-                adaBarang = true;
-            }
+    boolean adaBarang = false;
+    for (int i = 0; i < barang.length; i++) {
+        if (pesanan[i] > 0) {
+            System.out.println("- " + barangDipesan[i] + " (" + pesanan[i] + " barang, " + lamaPeminjaman[i] + " hari)");
+            adaBarang = true;
         }
-        if (!adaBarang) {
-            System.out.println("Tidak ada barang yang dipilih.");
-        }
+    }
+    if (!adaBarang) {
+        System.out.println("Tidak ada barang yang dipilih.");
 
+        System.out.println("\nMenu:");
+        System.out.println("1. Sewa PlayStation");
+        System.out.println("2. Kembali ke Menu Utama");
+        System.out.print("Masukkan pilihan (1/2): ");
+        int pilihan = scanner.nextInt();
+        scanner.nextLine();
+
+        if (pilihan == 1) {
+            pesanBarang();
+        } else if (pilihan == 2) {
+            menuUtama();
+        } else {
+            System.out.println("Pilihan tidak valid, kembali ke Menu Utama.");
+            menuUtama();
+        }
+    } else {
         System.out.print("Checkout Pesanan (ya/tidak) : ");
         String pilihan = scanner.nextLine();
         if (pilihan.equalsIgnoreCase("ya")) {
             cetakNota();
-        } else if (pilihan.equalsIgnoreCase("tidak")){
+        } else if (pilihan.equalsIgnoreCase("tidak")) {
             menuUtama();
         }
-        }
+    }
     }
 
     static void pesanBarang() {
@@ -131,26 +155,42 @@ public class cobaPA {
             scanner.nextLine();
 
             pesanan[nomorBarang - 1] += jumlahSeri;
-            barangDipesan[nomorBarang - 1] = barang[nomorBarang - 1]; // Menyimpan nama barang yang dipilih
+            barangDipesan[nomorBarang - 1] = barang[nomorBarang - 1]; 
 
             System.out.print("Masukkan lama sewa (hari) untuk seri " + barang[nomorBarang - 1] + ": ");
             lamaPeminjaman[nomorBarang - 1] = scanner.nextInt();
             scanner.nextLine();
         } else {
             System.out.println("Nomor barang tidak valid.");
-            i--; // Mengulangi input untuk nomor barang yang tidak valid
+            i--; 
         }
-    }
+
+        }
+        System.out.println("\nBarang berhasil dipesan!");
+
+        System.out.print("Apakah Anda ingin masuk ke Keranjang (1) atau kembali ke Menu Utama (2)? Masukkan pilihan (1/2): ");
+        int pilihan = scanner.nextInt();
+        scanner.nextLine();
+
+        if (pilihan == 1) {
+            keranjang();
+        } else if (pilihan == 2) {
+            menuUtama();
+        } else {
+            System.out.println("Pilihan tidak valid, kembali ke Menu Utama.");
+            menuUtama();
+        }
     }
 
     static void cetakNota() {
-        System.out.println("\nNota Sewa PlayStation:");
-        System.out.println("Nama: " + nama);
-        System.out.println("No HP: " + noHP);
-        System.out.println("NIK: " + NIK);
-        System.out.println("Jumlah Barang:");
+        System.out.println("\n===========================================");
+        System.out.println("========== Nota Sewa PlayStation ==========");
+        System.out.println("===========================================");
+        System.out.println("Nama\t\t: " + nama);
+        System.out.println("No HP\t\t: " + noHP);
+        System.out.println("NIK\t\t: " + NIK);
 
-        System.out.println("\nBarang yang Disewa:");
+        System.out.println("Barang yang Disewa:");
     boolean adaBarang = false;
     for (int i = 0; i < barang.length; i++) {
         if (pesanan[i] > 0) {
@@ -170,7 +210,8 @@ public class cobaPA {
         }
     }
 
-    System.out.println("\nTotal yang harus dibayar: Rp " + totalHarga);
+    System.out.println("\nTotal yang harus dibayar : Rp " + totalHarga);
+    System.out.println("===========================================");
     }
 
     
