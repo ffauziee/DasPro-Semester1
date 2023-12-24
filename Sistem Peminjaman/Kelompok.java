@@ -140,7 +140,6 @@ public class Kelompok {
                     cetakNota();
                     break;
                 case 2:
-                    editBarang();
                     keranjang(); // Kembali ke menu keranjang setelah mengedit
                     break;
                 case 3:
@@ -155,29 +154,6 @@ public class Kelompok {
         }
     }
     }
-
-    static void editBarang() {
-        System.out.print("Masukkan nomor barang yang ingin diedit (1-" + barang.length + "): ");
-        int nomorBarang = scanner.nextInt();
-        scanner.nextLine();
-    
-        if (nomorBarang >= 1 && nomorBarang <= barang.length) {
-            System.out.print("Masukkan jumlah barang seri " + barang[nomorBarang - 1] + " yang ingin diubah: ");
-            int jumlahSeri = scanner.nextInt();
-            scanner.nextLine();
-    
-            pesanan[nomorBarang - 1] = jumlahSeri;
-    
-            System.out.print("Masukkan lama sewa (hari) untuk seri " + barang[nomorBarang - 1] + ": ");
-            lamaPeminjaman[nomorBarang - 1] = scanner.nextInt();
-            scanner.nextLine();
-    
-            System.out.println("Barang berhasil diubah!");
-        } else {
-            System.out.println("Nomor barang tidak valid.");
-        }
-    }
-    
 
     static void pesanBarang() {
         listBarangHarga();
